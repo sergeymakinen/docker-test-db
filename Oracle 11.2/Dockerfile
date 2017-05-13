@@ -19,7 +19,7 @@ ENV ORACLE_HOME $ORACLE_BASE/product/11.2.0/xe
 ENV ORACLE_USER docker
 ENV ORACLE_PASSWORD docker
 ENV ORACLE_DB docker
-ENV ORACLE_SID=XE
+ENV ORACLE_SID XE
 ENV PATH $PATH:$ORACLE_HOME/bin
 ENV AWK /usr/bin/awk
 
@@ -32,11 +32,11 @@ RUN apt-get update && apt-get install -y bc libaio1 net-tools \
     && mkdir -p $ORACLE_PRODUCT /var/lock/subsys && mv $ORACLE_HOME/* $ORACLE_PRODUCT && rm -rf "$TMP_DIR" $ORACLE_BASE/* $ORACLE_PRODUCT/dbs \
     && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl alien
     
-RUN config="COMMIT_WAIT = NOWAIT\nCOMMIT_LOGGING = BATCH\nDISK_ASYNCH_IO = FALSE\nFILESYSTEMIO_OPTIONS = NONE" \
+RUN config="PGA_AGGREGATE_TARGET = 256000000\nSGA_TARGET = 512000000\nCOMMIT_WAIT = NOWAIT\nCOMMIT_LOGGING = BATCH\nDISK_ASYNCH_IO = FALSE\nFILESYSTEMIO_OPTIONS = NONE" \
     && echo "$config" >> $ORACLE_PRODUCT/config/scripts/init.ora \
     && echo "$config" >> $ORACLE_PRODUCT/config/scripts/initXETemp.ora \
-    && sed -i -E 's#memory_target=[^\n]+#memory_target=536870912#' $ORACLE_PRODUCT/config/scripts/init.ora \
-    && sed -i -E 's#memory_target=[^\n]+#memory_target=536870912#' $ORACLE_PRODUCT/config/scripts/initXETemp.ora \
+    && sed -i 's#memory_target=#\# memory_target=#' $ORACLE_PRODUCT/config/scripts/init.ora \
+    && sed -i 's#memory_target=#\# memory_target=#' $ORACLE_PRODUCT/config/scripts/initXETemp.ora \
     && sed -i -E 's#HOST = [^)]+#HOST = 0.0.0.0#' $ORACLE_PRODUCT/network/admin/listener.ora \
     && sed -i -E 's#PORT = [^)]+#PORT = 1521#' $ORACLE_PRODUCT/network/admin/listener.ora \
     && echo 'DIAG_ADR_ENABLED = OFF' >> $ORACLE_PRODUCT/network/admin/listener.ora \
