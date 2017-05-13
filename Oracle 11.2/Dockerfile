@@ -25,6 +25,7 @@ ENV AWK /usr/bin/awk
 
 RUN apt-get update && apt-get install -y bc libaio1 net-tools \
         curl alien \
+    && echo '#!/bin/bash' > /sbin/chkconfig && chmod +x /sbin/chkconfig \
     && TMP_DIR="$(mktemp -d)" && cd "$TMP_DIR" \
     && for part in $(seq 1 7); do echo "Downloading part $part of 7" && curl -L https://github.com/sergeymakinen/docker-test-db/raw/assets/oracle-xe-11.2.0-1.0.x86_64.rpm.$part -o server.rpm.$part; done \
     && cat server.rpm.* > server.rpm && alien -c -i -k -v server.rpm \
@@ -40,7 +41,6 @@ RUN config="COMMIT_WAIT = NOWAIT\nCOMMIT_LOGGING = BATCH\nDISK_ASYNCH_IO = FALSE
     && sed -i -E 's#PORT = [^)]+#PORT = 1521#' $ORACLE_PRODUCT/network/admin/listener.ora \
     && echo 'DIAG_ADR_ENABLED = OFF' >> $ORACLE_PRODUCT/network/admin/listener.ora \
     && echo "export ORACLE_HOME=$ORACLE_HOME\nexport PATH=$PATH\nexport ORACLE_SID=$ORACLE_SID" > /etc/profile.d/oracle-xe.sh \
-    && echo '#!/bin/bash' > /sbin/chkconfig && chmod +x /sbin/chkconfig \
     && chown -R oracle:dba $ORACLE_PRODUCT
 
 VOLUME $ORACLE_BASE
