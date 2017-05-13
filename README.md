@@ -8,6 +8,7 @@ This repository contains **Dockerfiles** of various SQL DBMSes optimized for tes
 
 * `cubrid-9.3` [(CUBRID 9.3/Dockerfile)](CUBRID%209.3/Dockerfile)
 * `mssql-17.0` [(MS SQL 17.0/Dockerfile)](MS%20SQL%2017.0/Dockerfile)
+* `mysql-5.0` [(MySQL 5.0/Dockerfile)](MySQL%205.0/Dockerfile)
 * `mysql-5.1` [(MySQL 5.1/Dockerfile)](MySQL%205.1/Dockerfile)
 * `oracle-11.2` [(Oracle 11.2/Dockerfile)](Oracle%2011.2/Dockerfile)
 * `postgresql-9.3` [(PostgreSQL 9.3/Dockerfile)](PostgreSQL%209.3/Dockerfile)
