@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV GOSU_VERSION 1.10
 RUN apt-get update && apt-get install -y curl \
-	&& curl -L https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64 -o /usr/local/bin/gosu \
-	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true \
-	&& rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl
+    && curl -L https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64 -o /usr/local/bin/gosu \
+    && chmod +x /usr/local/bin/gosu \
+    && gosu nobody true \
+    && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl
 
 ENV CUBRID_MAJOR 9.3
 ENV CUBRID_VERSION 9.3.8.0003
@@ -27,7 +27,7 @@ RUN groupadd -r cubrid && useradd -r -g cubrid cubrid \
     && apt-get update && apt-get install -y curl \
     && curl -L http://ftp.cubrid.org/CUBRID_Engine/$CUBRID_MAJOR/CUBRID-$CUBRID_VERSION-linux.x86_64.tar.gz -o cubrid.tar.gz \
     && mkdir $CUBRID && tar -xzf cubrid.tar.gz -C $CUBRID --strip-components=1 && rm cubrid.tar.gz \
-	&& mkdir -p $CUBRID_DATABASES \
+    && mkdir -p $CUBRID_DATABASES \
     && chown -R cubrid:cubrid $CUBRID $CUBRID_DATABASES \
     && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl
 

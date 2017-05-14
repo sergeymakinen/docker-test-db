@@ -10,12 +10,12 @@ init_server() {
 }
 
 start_db() {
-	if [ -d $ORACLE_BASE/oradata ]; then
-		echo "Database '$ORACLE_DB' is initialized already"
+    if [ -d $ORACLE_BASE/oradata ]; then
+        echo "Database '$ORACLE_DB' is initialized already"
         if [ ! -f /etc/oratab ]; then
-       	    echo "XE:$ORACLE_HOME:N" > /etc/oratab
-    	    chown oracle:dba /etc/oratab
-    	    chmod 664 /etc/oratab
+               echo "XE:$ORACLE_HOME:N" > /etc/oratab
+            chown oracle:dba /etc/oratab
+            chmod 664 /etc/oratab
         fi
         if [ ! -f /etc/default/oracle-xe ]; then
             echo -e "ORACLE_DBENABLED=true\nLISTENER_PORT=1521\nHTTP_PORT=8080\nCONFIGURE_RUN=true" > /etc/default/oracle-xe
@@ -23,10 +23,10 @@ start_db() {
         rm -f $ORACLE_PRODUCT/dbs
         ln -fsT $ORACLE_BASE/dbs $ORACLE_PRODUCT/dbs
         /etc/init.d/oracle-xe start
-		return
-	fi
+        return
+    fi
 
-	echo "Initializing database '$ORACLE_DB'"
+    echo "Initializing database '$ORACLE_DB'"
     rm -f $ORACLE_PRODUCT/dbs
     mkdir -p $ORACLE_BASE/dbs
     ln -fsT $ORACLE_BASE/dbs $ORACLE_PRODUCT/dbs
@@ -73,8 +73,8 @@ trap stop_db SIGTERM
 if [ $# -eq 0 ]; then
     init_server && start_db
     while [ "$stopped" == '' ]; do
-		sleep 1
-	done
+        sleep 1
+    done
 else
-	exec "$@"
+    exec "$@"
 fi

@@ -2,26 +2,26 @@
 set -e
 
 init_server () {
-	if [ -d $MYSQL_DATABASES/mysql ]; then
-		echo "Server is initialized already"
-		return
-	fi
+    if [ -d $MYSQL_DATABASES/mysql ]; then
+        echo "Server is initialized already"
+        return
+    fi
 
-	echo "Initializing server"
+    echo "Initializing server"
     gosu mysql mysql_install_db --datadir=$MYSQL_DATABASES --basedir=$MYSQL
 }
 
 init_db () {
-	if [ -d $MYSQL_DATABASES/$MYSQL_DB ]; then
-		echo "Database '$MYSQL_DB' is initialized already"
-		return
-	fi
+    if [ -d $MYSQL_DATABASES/$MYSQL_DB ]; then
+        echo "Database '$MYSQL_DB' is initialized already"
+        return
+    fi
     
     echo "Initializing database '$MYSQL_DB'"
     chown -R mysql:mysql $MYSQL_DATABASES
     while [ ! -S /tmp/mysql.sock ]; do
         echo "Waiting for the server to be started"
-    	sleep 5
+        sleep 5
     done
     SQL=$(cat <<SQL
 CREATE DATABASE \`$MYSQL_DB\`;
@@ -45,10 +45,10 @@ stop_db() {
 trap stop_db SIGTERM
 
 if [ $# -eq 0 ]; then
-	init_server && gosu mysql mysqld --datadir=$MYSQL_DATABASES --basedir=$MYSQL --language=$MYSQL/share/mysql/english --socket=/tmp/mysql.sock --pid-file=/tmp/mysql.pid --innodb-flush-log-at-trx-commit=0 --innodb-support-xa=0  --default-storage-engine=InnoDB & init_db
+    init_server && gosu mysql mysqld --datadir=$MYSQL_DATABASES --basedir=$MYSQL --language=$MYSQL/share/mysql/english --socket=/tmp/mysql.sock --pid-file=/tmp/mysql.pid --innodb-flush-log-at-trx-commit=0 --innodb-support-xa=0  --default-storage-engine=InnoDB & init_db
     while [ "$stopped" == '' ]; do
-		sleep 1
-	done
+        sleep 1
+    done
 else
-	exec "$@"
+    exec "$@"
 fi

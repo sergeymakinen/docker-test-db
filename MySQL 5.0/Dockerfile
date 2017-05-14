@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV GOSU_VERSION 1.10
 RUN apt-get update && apt-get install -y curl \
-	&& curl -L https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64 -o /usr/local/bin/gosu \
-	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true \
-	&& rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl
+    && curl -L https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64 -o /usr/local/bin/gosu \
+    && chmod +x /usr/local/bin/gosu \
+    && gosu nobody true \
+    && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl
 
 ENV MYSQL_MAJOR 5.0
 ENV MYSQL_VERSION 5.0.96
@@ -28,7 +28,7 @@ RUN groupadd -r mysql && useradd -r -g mysql mysql \
     && rpm2cpio server.rpm | cpio -i -d -v && cp -r usr/* $MYSQL && rm -rf ./* \
     && curl -L https://downloads.mysql.com/archives/get/file/MySQL-client-$MYSQL_VERSION-1.glibc$MYSQL_GLIBC_VERSION.x86_64.rpm -o client.rpm \
     && rpm2cpio client.rpm | cpio -i -d -v && cp -r usr/* $MYSQL && rm -rf "$TMP_DIR" \
-	&& mkdir -p $MYSQL_DATABASES \
+    && mkdir -p $MYSQL_DATABASES \
     && chown -R mysql:mysql $MYSQL $MYSQL_DATABASES \
     && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl rpm2cpio cpio
     

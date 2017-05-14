@@ -4,19 +4,19 @@ set -e
 init_db () {
     while [ ! -f /var/opt/mssql/log/errorlog ]; do
         echo "Waiting for the configuration to be finished"
-    	sleep 5
+        sleep 5
     done
     while ! cat /var/opt/mssql/log/errorlog | tr -d '\000' | grep -qw "SQL Server is now ready for client connections."; do
         echo "Waiting for the server to be started"
-    	sleep 5
+        sleep 5
     done
     echo started
-	if ! grep -qw "NULL" <(sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -d master -Q "SELECT (SCHEMA_ID('$MSSQL_DB'))"); then
-		echo "Database '$MSSQL_DB' is initialized already"
-		return
-	fi
+    if ! grep -qw "NULL" <(sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -d master -Q "SELECT (SCHEMA_ID('$MSSQL_DB'))"); then
+        echo "Database '$MSSQL_DB' is initialized already"
+        return
+    fi
 
-	echo "Initializing database '$MSSQL_DB'"
+    echo "Initializing database '$MSSQL_DB'"
     SQL=$(cat <<SQL
 CREATE DATABASE [$MSSQL_DB];
 GO
@@ -41,5 +41,5 @@ if [ $# -eq 0 ]; then
     /opt/mssql/bin/sqlservr.sh & init_db
     exec tail -F /dev/null
 else
-	exec "$@"
+    exec "$@"
 fi
