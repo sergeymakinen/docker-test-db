@@ -7,6 +7,7 @@ This repository contains **Dockerfiles** of various SQL DBMSes optimized for tes
 ## Supported tags and respective `Dockerfile` links
 
 * `cubrid-9.3` [(CUBRID 9.3/Dockerfile)](CUBRID%209.3/Dockerfile)
+* `cubrid-10.0` [(CUBRID 10.0/Dockerfile)](CUBRID%2010.0/Dockerfile)
 * `mssql-17.0` [(MS SQL 17.0/Dockerfile)](MS%20SQL%2017.0/Dockerfile)
 * `mysql-5.0` [(MySQL 5.0/Dockerfile)](MySQL%205.0/Dockerfile)
 * `mysql-5.1` [(MySQL 5.1/Dockerfile)](MySQL%205.1/Dockerfile)
@@ -39,7 +40,7 @@ docker run --name some-cubrid -p 33000:33000 -t ./data:/var/lib/cubrid -d sergey
 
 #### Connect to it
 
-Parameter | Value | Environment variable
+Parameter | Default value | Environment variable
 --- | --- | ---
 Host | `localhost` |
 Port | `33000 ` |
@@ -57,7 +58,7 @@ docker run --name some-mssql -p 1433:1433 -d sergeymakinen/test-db:mssql-17.0
 
 #### Connect to it
 
-Parameter | Value | Environment variable
+Parameter | Default value | Environment variable
 --- | --- | ---
 Host | `localhost` |
 Port | `1433` |
@@ -81,7 +82,7 @@ docker run --name some-mysql -p 3306:3306 -t ./data:/var/lib/mysql -d sergeymaki
 
 #### Connect to it
 
-Parameter | Value | Environment variable
+Parameter | Default value | Environment variable
 --- | --- | ---
 Host | `localhost` |
 Port | `3306` |
@@ -105,7 +106,7 @@ docker run --name some-oracle -p 1521:1521 -t ./data:/u01/app/oracle -d sergeyma
 
 #### Connect to it
 
-Parameter | Value | Environment variable
+Parameter | Default value | Environment variable
 --- | --- | ---
 Host | `localhost` |
 Port | `1521` |
@@ -130,7 +131,7 @@ docker run --name some-postgresql -p 5432:5432 -t ./data:/var/lib/postgresql/dat
 
 #### Connect to it
 
-Parameter | Value | Environment variable
+Parameter | Default value | Environment variable
 --- | --- | ---
 Host | `localhost` |
 Port | `5432` |
