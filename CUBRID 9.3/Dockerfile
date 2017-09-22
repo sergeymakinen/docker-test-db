@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y curl \
     && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl
 
 ENV CUBRID_MAJOR 9.3
-ENV CUBRID_VERSION 9.3.8.0003
+ENV CUBRID_VERSION 9.3.9.0002
 ENV CUBRID /usr/local/cubrid
 ENV CUBRID_DATABASES /var/lib/cubrid
 ENV CUBRID_USER docker
