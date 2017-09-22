@@ -1,4 +1,4 @@
-FROM microsoft/mssql-server-linux:ctp-2.0
+FROM microsoft/mssql-server-linux:rc2
 
 LABEL maintainer "sergey@makinen.ru"
 
