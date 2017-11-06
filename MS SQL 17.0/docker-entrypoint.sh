@@ -38,7 +38,7 @@ SQL
 }
 
 if [ $# -eq 0 ]; then
-    /opt/mssql/bin/sqlservr.sh & init_db
+    /opt/mssql/bin/sqlservr & init_db
     exec tail -F /dev/null
 else
     exec "$@"
