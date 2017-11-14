@@ -13,6 +13,7 @@ This repository contains **Dockerfiles** of various SQL DBMSes optimized for tes
 * `mysql-5.1` [(MySQL 5.1/Dockerfile)](https://github.com/sergeymakinen/docker-test-db/blob/master/MySQL%205.1/Dockerfile)
 * `oracle-11.2` [(Oracle 11.2/Dockerfile)](https://github.com/sergeymakinen/docker-test-db/blob/master/Oracle%2011.2/Dockerfile)
 * `postgresql-9.3` [(PostgreSQL 9.3/Dockerfile)](https://github.com/sergeymakinen/docker-test-db/blob/master/PostgreSQL%209.3/Dockerfile)
+* `postgresql-9.5` [(PostgreSQL 9.5/Dockerfile)](https://github.com/sergeymakinen/docker-test-db/blob/master/PostgreSQL%209.5/Dockerfile)
 
 ## Installation
 
